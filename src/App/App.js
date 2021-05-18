@@ -1,25 +1,29 @@
-import logo from "./logo.svg";
-import "./App.css";
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import Paper from "@material-ui/core/Paper";
+import Grid from "@material-ui/core/Grid";
+import { Helmet } from "react-helmet";
+import Map from "../Map";
+import Chat from "../Chat/index";
+import Rotations from "../Information/index";
 
-function App() {
+export default function CenteredGrid() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Grid container spacing={6}>
+        <Grid item xs={12} lg={8}>
+          <Helmet title="Analytics Dashboard" />
+          <Map />
+        </Grid>
+        <Grid item xs={12} lg={4}>
+          <Chat />
+        </Grid>
+      </Grid>
+      <Grid container spacing={6}>
+        <Grid item xs={12} lg={12}>
+          <Rotations />
+        </Grid>
+      </Grid>
     </div>
   );
 }
-
-export default App;

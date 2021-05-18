@@ -2,11 +2,23 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App/App";
+import Map from "./Map/index";
+import Chat from "./Chat/index";
+import { BrowserRouter, Route } from "react-router-dom";
+import { ThemeProvider } from "@material-ui/core/styles";
+import CssBaseline from "@material-ui/core/CssBaseline";
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <ThemeProvider>
+    {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+    <CssBaseline />
+    <BrowserRouter>
+      <div className="App">
+        <Route path="/" exact component={App} />
+        <Route path="/map" exact component={Map} />
+      </div>
+    </BrowserRouter>
+  </ThemeProvider>,
   document.getElementById("root")
 );
 
