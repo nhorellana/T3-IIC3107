@@ -49,7 +49,15 @@ const CardMedia = styled(MuiCardMedia)`
 
 const Typography = styled(MuiTypography)(spacing);
 
-function Rotation({ title, description, chip }) {
+function Flight({
+  title,
+  origin,
+  destination,
+  airline,
+  residents,
+  seats,
+  plane,
+}) {
   const [open, setOpen] = React.useState(false);
   const classes = useStyles();
 
@@ -73,14 +81,25 @@ function Rotation({ title, description, chip }) {
         <Typography gutterBottom variant="h5" component="h2">
           {title}
         </Typography>
-        {chip}
         <Typography mb={4} component="p">
-          {description}
+          {"Origen: " + origin}
+        </Typography>
+        <Typography mb={4} component="p">
+          {"Destino: " + destination}
+        </Typography>
+        <Typography mb={4} component="p">
+          {"Aerolínea: " + airline}
+        </Typography>
+        <Typography mb={4} component="p">
+          {"Avión: " + plane}
+        </Typography>
+        <Typography mb={4} component="p">
+          {"Asientos: " + seats}
         </Typography>
       </CardContent>
       <CardActions>
         <Button size="small" color="primary" onClick={handleClickOpen}>
-          Mas Informacion
+          Pasajeros
         </Button>
       </CardActions>
       <Dialog
@@ -93,18 +112,17 @@ function Rotation({ title, description, chip }) {
         <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Acá aparecé el listado de residentes con sus respectivo numero de
-            procedimientos
+            Acá aparecé el listado de cada pasajero con su edad
           </DialogContentText>
           <List className={classes.root}>
-            {residents_data.map((resident, index) => (
+            {residents.map((resident, index) => (
               <ListItem
                 button
                 onClick={() => handleListItemClick(resident.name)}
                 key={index}
               >
                 <ListItemText primary={resident.name} align="left" />
-                <ListItemText primary={resident.operations} align="right" />
+                <ListItemText primary={resident.age} align="right" />
               </ListItem>
             ))}
           </List>
@@ -119,39 +137,30 @@ function Rotation({ title, description, chip }) {
   );
 }
 
-function Rotations() {
+function Flights(props) {
+  const flights = props.flights;
+
   return (
     <React.Fragment>
       <Divider my={6} />
 
       <Grid container spacing={6}>
-        <Grid item xs={12} lg={6} xl={3}>
-          <Rotation
-            title="Rotación 1"
-            description="Esta es la rotación de X personas den Y unidad. La idea es que al hacer click acá se abra un modal donde salga una lista de cada miembro de la rotación con sus procedimientos (totales, de la semana, etc) y al hacerle click, se pueda dirigir al perfil del residente"
-          />
-        </Grid>
-        <Grid item xs={12} lg={6} xl={3}>
-          <Rotation
-            title="Rotación 2"
-            description="Esta es la rotación de X personas den Y unidad. La idea es que al hacer click acá se abra un modal donde salga una lista de cada miembro de la rotación con sus procedimientos (totales, de la semana, etc) y al hacerle click, se pueda dirigir al perfil del residente"
-          />
-        </Grid>
-        <Grid item xs={12} lg={6} xl={3}>
-          <Rotation
-            title="Rotación 3"
-            description="Esta es la rotación de X personas den Y unidad. La idea es que al hacer click acá se abra un modal donde salga una lista de cada miembro de la rotación con sus procedimientos (totales, de la semana, etc) y al hacerle click, se pueda dirigir al perfil del residente"
-          />
-        </Grid>
-        <Grid item xs={12} lg={6} xl={3}>
-          <Rotation
-            title="Rotación 4"
-            description="Esta es la rotación de X personas den Y unidad. La idea es que al hacer click acá se abra un modal donde salga una lista de cada miembro de la rotación con sus procedimientos (totales, de la semana, etc) y al hacerle click, se pueda dirigir al perfil del residente"
-          />
-        </Grid>
+        {flights.map((flight, index) => (
+          <Grid item xs={12} lg={6} xl={3}>
+            <Flight
+              title={"Vuelo: " + flight.code} //Codigo de avión
+              origin={flight.origin}
+              destination={flight.destination}
+              residents={flight.passengers}
+              seats={flight.seats}
+              airline={flight.airline}
+              plane={flight.plane}
+            />
+          </Grid>
+        ))}
       </Grid>
     </React.Fragment>
   );
 }
 
-export default Rotations;
+export default Flights;

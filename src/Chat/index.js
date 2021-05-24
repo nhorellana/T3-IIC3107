@@ -12,10 +12,6 @@ class Chat extends Component {
     },
   };
 
-  onSendMessage = (message) => {
-    this.state.messages.push({ member: "hola2", text: message });
-  };
-
   render() {
     return (
       <div className="Chat">

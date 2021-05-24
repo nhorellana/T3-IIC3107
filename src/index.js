@@ -15,7 +15,6 @@ ReactDOM.render(
     <BrowserRouter>
       <div className="App">
         <Route path="/" exact component={App} />
-        <Route path="/map" exact component={Map} />
       </div>
     </BrowserRouter>
   </ThemeProvider>,
