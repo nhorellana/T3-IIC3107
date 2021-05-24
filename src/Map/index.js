@@ -27,7 +27,6 @@ export default function Map(props) {
   useEffect(() => {
     socket.on("POSITION", (payload) => {
       var check = positions.find((x) => x.code === payload.code);
-
       if (typeof check !== "undefined") {
         positions[positions.indexOf(check)] = payload;
         setPosition(positions);
@@ -35,9 +34,6 @@ export default function Map(props) {
         setPosition([...positions, payload]);
       }
     });
-    return () => {
-      socket.off();
-    };
   }, [positions]);
 
   return (
